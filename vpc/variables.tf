@@ -20,7 +20,7 @@ variable "azs" {
 
 variable "cert" {
   type = string
-  default = "arn:aws:acm:eu-west-2:368211546133:certificate/6bfeffcf-b6e4-4169-a5d6-7d5d78805123"
+  default = ""
 }
 
 variable "host" {
