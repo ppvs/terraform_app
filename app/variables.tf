@@ -3,11 +3,16 @@ variable "name" {
   default     = "dev_app"
 }
 
+variable "environment" {
+  type        = string
+  default     = "dev"
+}
+
 variable "autoscaling" {
   default = {
-    desired_capacity = "3"
+    desired_capacity = "1"
     max_size         = "3"
-    min_size         = "3"
+    min_size         = "1"
   }
 }
 

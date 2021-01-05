@@ -1,8 +1,9 @@
 resource "aws_vpc" "dev" {
   cidr_block           = var.vpc_cidr
   enable_dns_hostnames = true
+
   tags = {
-    Name = "vpc-dev"
+    Environment = var.environment
   }
 }
 
@@ -12,7 +13,7 @@ resource "aws_subnet" "dev" {
   cidr_block = "${var.subnets_cidr[count.index]}"
   availability_zone = "${var.azs[count.index]}"
   tags = {
-    Name = "subnet-app"
+    Environment = var.environment
   }
   depends_on = [aws_internet_gateway.dev]
 }
@@ -20,7 +21,7 @@ resource "aws_subnet" "dev" {
 resource "aws_internet_gateway" "dev" {
   vpc_id = aws_vpc.dev.id
   tags = {
-    Name = "internet-gateway"
+    Environment = var.environment
   }
 }
 
@@ -33,7 +34,7 @@ resource "aws_route_table" "dev" {
   }
 
   tags = {
-    Env = "dev"
+    Environment = var.environment
   }
 }
 

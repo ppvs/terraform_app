@@ -2,11 +2,26 @@ provider "aws" {
   region = var.aws_region
 }
 
-data "terraform_remote_state" "vpc" {
-  backend = "local"
+terraform {
+  backend "s3" {
+    bucket = "backup-test-env"
+    key    = "state/app/tfstate"
+    region = "eu-west-2"
+  }
+}
 
+data "terraform_remote_state" "vpc" {
+  // backend = "local"
+
+  // config = {
+  //   path = "../vpc/terraform.tfstate"
+  // }
+
+  backend = "s3"
   config = {
-    path = "../vpc/terraform.tfstate"
+    bucket = "backup-test-env"
+    key    = "state/infrastructure/tfstate"
+    region = "eu-west-2"
   }
 }
 
