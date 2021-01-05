@@ -8,7 +8,7 @@ resource "aws_alb_listener_rule" "app" {
 
   condition {
     path_pattern {
-      values = ["/${var.name}/*"]
+      values = ["/${var.name}*"]
     }
   }
 }
@@ -21,5 +21,9 @@ resource "aws_alb_target_group" "app" {
     health_check {
     interval = 5
     timeout  = 2
+  }
+  tags = {
+    Environment = var.environment
+    Application = var.name
   }
 }

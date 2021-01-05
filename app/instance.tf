@@ -8,9 +8,21 @@ resource "aws_autoscaling_group" "app" {
   termination_policies      = ["OldestLaunchConfiguration"]
   vpc_zone_identifier       = var.subnets
   target_group_arns         = [aws_alb_target_group.app.id]
+
+  tags = concat( [
+    {
+      key                 = "Environment"
+      value               = var.environment
+      propagate_at_launch = true
+    },
+    {
+      key                 = "Application"
+      value               = var.name
+      propagate_at_launch = true
+    }
+  ])
 }
 
-# Configure instance launching configuration
 resource "aws_launch_configuration" "app" {
   name_prefix   = var.name
   image_id      = data.aws_ami.ubuntu.id
@@ -42,5 +54,10 @@ resource "aws_security_group" "app" {
     to_port     = 0
     protocol    = "-1"
     cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Environment = var.environment
+    Application = var.name
   }
 }

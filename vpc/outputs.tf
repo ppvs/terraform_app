@@ -15,5 +15,5 @@ output "alb" {
 }
 
 output "alb-listener" {
-  value = aws_alb_listener.alb-dev.id
+  value = "${var.cert != "" ? aws_alb_listener.alb-dev-https[0].id : aws_alb_listener.alb-dev.id}"
 }
