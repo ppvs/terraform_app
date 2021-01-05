@@ -26,7 +26,8 @@ data "terraform_remote_state" "vpc" {
 }
 
 module "project" {
-    source = "../app/"
+    // source = "../app/"
+    source = "git::https://github.com/ppvs/terraform_app//app?ref=test"
     
     for_each = var.projects
 
