@@ -31,6 +31,7 @@ module "project" {
     for_each = var.projects
 
     name = each.key
+    environment = each.value.environment
     vpc = data.terraform_remote_state.vpc.outputs.vpc
     subnets = data.terraform_remote_state.vpc.outputs.subnet
     alb = data.terraform_remote_state.vpc.outputs.alb
