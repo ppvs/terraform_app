@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "backup-test-env"
+    bucket = "your-bucket"
     key    = "state/infrastructure/tfstate"
     region = "eu-west-2"
   }

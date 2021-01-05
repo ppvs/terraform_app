@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "backup-test-env"
+    bucket = "your-bucket"
     key    = "state/app/tfstate"
     region = "eu-west-2"
   }
@@ -19,7 +19,7 @@ data "terraform_remote_state" "vpc" {
 
   backend = "s3"
   config = {
-    bucket = "backup-test-env"
+    bucket = "your-bucket"
     key    = "state/infrastructure/tfstate"
     region = "eu-west-2"
   }
